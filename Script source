@@ -1,0 +1,115 @@
+-- https://github.com/deeeity/mercury-lib
+
+local Mercury = loadstring(game:HttpGet("https://raw.githubusercontent.com/ygenf/Mercury/main/Custom"))()
+
+local GUI = Mercury:Create{
+    Name = "Homie Sex",
+    Size = UDim2.fromOffset(715, 500),
+    Theme = Mercury.Themes.Dark2,
+    Link = "Michael.Cat"
+} 
+
+GUI:Notification{
+	Title = "Help",
+	Text = "RightShift to toggle GUI.",
+	Duration = 5,
+	Callback = function() end
+}
+
+GUI:Notification{
+	Title = "Help",
+	Text = "Use pause menu to use the GUI while in game.",
+	Duration = 5,
+	Callback = function() end
+}
+
+local Tab1 = GUI:Tab{
+	Name = "Combat",
+	Icon = "rbxassetid://6034996695"
+}
+
+Tab1:toggle{
+		Name = "Knife Aura",
+		Description = "Knifes all the zombies around you.",
+		StartingState = false,
+		Callback = function(state)
+        _G.Aura = state
+    while _G.Aura do
+	local success, err = pcall(function()
+    for _, zombie in ipairs(game:GetService("Workspace").Ignore.Zombies:GetChildren()) do
+        zombie:WaitForChild('Humanoid', 1)
+        game:GetService("ReplicatedStorage").Framework.Remotes.KnifeHitbox:FireServer(zombie.Humanoid)
+        end
+    if not success then
+        
+        end
+	end)
+	wait(0.1)
+        end
+	end,
+	}
+	
+	Tab1:toggle{
+		Name = "infinite Magazine",
+		Description = "Auto loads bullets in to the magazine.",
+		StartingState = false,
+		Callback = function(state)
+		    _G.Reload = state
+		    while _G.Reload do
+	local success, err = pcall(function()
+local l__LocalPlayer__10 = game.Players.LocalPlayer;
+local v14 = l__LocalPlayer__10.Character or l__LocalPlayer__10.CharacterAdded:wait();
+local l__Remotes__35 = v14:WaitForChild("Remotes");
+local l__Reload__46 = l__Remotes__35:WaitForChild("Reload");
+l__Reload__46:FireServer();
+    if not success then
+        end
+	end)
+        wait(0.1)
+        end
+	end,
+	}
+	
+	
+	
+	-- 2
+	local Tab2 = GUI:Tab{
+	Name = "Teleport",
+	Icon = "rbxassetid://8569322835"
+}
+
+local Tab3 = GUI:Tab{
+	Name = "Visuals",
+	Icon = "rbxassetid://8569322835"
+}
+
+Tab3:toggle{
+		Name = "Zombie ESP",
+		Description = "Allows you to see zombies through walls.",
+		StartingState = false,
+		Callback = function(state)
+		    
+		end,
+	    }
+	    
+	    Tab3:toggle{
+		Name = "Player ESP",
+		Description = "Allows you to see the outline of Players through walls.",
+		StartingState = false,
+		Callback = function(state)
+getgenv().enabled = state --Toggle on/off
+getgenv().uselocalplayer = true --Choose whether the ESP highlights LocalPlayer or not
+getgenv().filluseteamcolor = false --Toggle fill color using player team color on/off
+getgenv().outlineuseteamcolor = false --Toggle outline color using player team color on/off
+getgenv().fillcolor = Color3.new(0, 0, 0) --Change fill color, no need to edit if using team color
+getgenv().outlinecolor = Color3.new(1, 1, 1) --Change outline color, no need to edit if using team color
+getgenv().filltrans = 0.7 --Change fill transparency
+getgenv().outlinetrans = 0 --Change outline transparency
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ygenf/Mercury/main/highlight"))()
+		end,
+	    }
+
+	
+	
+
